@@ -1,4 +1,4 @@
-package com.github.farhanaliofficial.signext;
+package com.github.farhaanaliii.signext;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;

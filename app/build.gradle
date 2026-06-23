@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace 'com.github.farhanaliofficial.signext'
+    namespace 'com.github.farhaanaliii.signext'
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.github.farhanaliofficial.signext"
+        applicationId "com.github.farhaanaliii.signext"
         minSdkVersion 23
         targetSdkVersion 35
         versionCode 1

@@ -1,4 +1,4 @@
-package com.github.farhanaliofficial.signext;
+package com.github.farhaanaliii.signext;
 
 import android.app.AlarmManager;
 import android.app.Application;
