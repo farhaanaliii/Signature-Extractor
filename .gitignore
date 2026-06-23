@@ -1,1 +1,32 @@
-/build
+# Gradle
+.gradle/
+build/
+/captures/
+.externalNativeBuild/
+
+# Local configuration
+local.properties
+.gradle
+
+# Signing files
+*.jks
+*.keystore
+
+# Android Studio
+/.idea/
+*.iml
+*.hprof
+
+# Generated files
+*.apk
+*.ap_ 
+*.dex
+*.class
+
+# Logs
+*.log
+
+# Misc
+.DS_Store
+node_modules/
+
