@@ -21,7 +21,7 @@ public class Applications extends Application {
 				Intent intent = new Intent(getApplicationContext(), DebugActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 				intent.putExtra("error", getStackTrace(ex));
-				PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 11111, intent, PendingIntent.FLAG_ONE_SHOT);
+				PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 11111, intent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
 				AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 				am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 1000, pendingIntent);
 				android.os.Process.killProcess(android.os.Process.myPid());
