@@ -29,6 +29,8 @@ import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import android.os.Handler;
+import android.os.Looper;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -83,17 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         copyBtn.setOnClickListener(v -> {
             String content = sigText.getText().toString();
-            if (content.isEmpty() || content.startsWith("Please") || content.startsWith("Package not found")) {
-                Toast.makeText(this, "Nothing to copy", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            
-            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText("Signature", content);
-            if (clipboard != null) {
-                clipboard.setPrimaryClip(clip);
-                Toast.makeText(this, "Signature copied to clipboard", Toast.LENGTH_SHORT).show();
-            }
+            performCopyAction(copyBtn, content);
         });
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -277,19 +269,33 @@ public class MainActivity extends AppCompatActivity {
         dialogSigText.setText(signature);
 
         dialogCopyBtn.setOnClickListener(v -> {
-            if (signature.isEmpty() || signature.startsWith("Please") || signature.startsWith("Package not found") || signature.startsWith("No signature") || signature.startsWith("Error")) {
-                Toast.makeText(this, "Nothing to copy", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText("Signature", signature);
-            if (clipboard != null) {
-                clipboard.setPrimaryClip(clip);
-                Toast.makeText(this, "Signature copied to clipboard", Toast.LENGTH_SHORT).show();
-            }
+            performCopyAction(dialogCopyBtn, signature);
         });
 
         dialog.show();
+    }
+
+    private void performCopyAction(MaterialButton button, String content) {
+        if (content.isEmpty() || content.startsWith("Please") || content.startsWith("Package not found") || content.startsWith("No signature") || content.startsWith("Error")) {
+            Toast.makeText(this, "Nothing to copy", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("Signature", content);
+        if (clipboard != null) {
+            clipboard.setPrimaryClip(clip);
+        }
+
+        button.setEnabled(false);
+        button.setText("Copied!");
+        button.setIconResource(R.drawable.ic_check);
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            button.setEnabled(true);
+            button.setText("Copy Signature");
+            button.setIconResource(R.drawable.ic_copy);
+        }, 1500);
     }
 
     private String getSignature(String pkg) {

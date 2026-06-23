@@ -99,6 +99,9 @@
         style="@style/Widget.Material3.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Copy Signature" />
+        android:text="Copy Signature"
+        app:icon="@drawable/ic_copy"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp" />
 
 </LinearLayout>
