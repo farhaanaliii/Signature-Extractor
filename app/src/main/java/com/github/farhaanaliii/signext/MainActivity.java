@@ -20,19 +20,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 		
-		Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
+		Toolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
         
 		init();
 		
-		getBtn.setOnClickListener(new View.OnClickListener(){
-			@Override
-			public void onClick(View v){
-				String pkgN = packageName.getText().toString();
-				String signature = getSignature(pkgN);
-				sigText.setText(signature);
-			}
-		});
+		getBtn.setOnClickListener(v -> {
+            String pkgN = packageName.getText().toString();
+            String signature = getSignature(pkgN);
+            sigText.setText(signature);
+        });
     }
     private void init(){
 		packageName = findViewById(R.id.packageName);
